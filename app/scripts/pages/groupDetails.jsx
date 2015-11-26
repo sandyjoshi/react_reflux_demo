@@ -40,12 +40,12 @@ const GroupDetails = React.createClass({
   },
 
   onStatusChange(state) {
+
     this.setState(state);
-    // filter properly.
+    // ToDo : filter should not be done all times.
     let members = this.state.groupUserItems.map(function (item) { return item.id });
     let remainingUserItems = this.state.totalUserItems.filter( item => members.indexOf(item.id) == -1) ;
-    this.setState({ remaingUsers : remainingUserItems });
-    this.setState({ userIndex : (remainingUserItems.length ? remainingUserItems[0].id : 0) })
+    this.setState({ remaingUsers : remainingUserItems, userIndex : (remainingUserItems.length ? remainingUserItems[0].id : 0) })
   },
 
   onUserAddedToGroup() {

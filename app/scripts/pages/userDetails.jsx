@@ -40,11 +40,10 @@ const UserDetails = React.createClass({
 
   onStatusChange(state) {
     this.setState(state);
-    // toDO : filter properly.
+    // ToDo : filter should not be done all times.
     let usedGroup = this.state.userGroupItems.map(function (item) { return item.id });
     let remainingGroupItems = this.state.totalGroupItems.filter( item => usedGroup.indexOf(item.id) == -1) ;
-    this.setState({ remaingGroup : remainingGroupItems });
-    this.setState({ groupIndex : (remainingGroupItems.length ? remainingGroupItems[0].id : 0) })
+    this.setState({ remaingGroup : remainingGroupItems , groupIndex : (remainingGroupItems.length ? remainingGroupItems[0].id : 0) })
 
   },
 
