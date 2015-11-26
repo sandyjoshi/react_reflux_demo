@@ -82,10 +82,13 @@ const User = React.createClass({
     this.setState({groupIndex : index, groupName : data.name }) ;
   },
 
+  /**
+   * search accordingly to filter applied.
+   */
   onSearchTextChange(evt){
     let searchText = evt.target.value;
 
-    let members = this.state.totalUserItems.filter( item => item.name.toLowerCase() == searchText.toLowerCase()) ;
+    let members = this.state.totalUserItems.filter( item => item.name.toLowerCase().indexOf( searchText.toLowerCase()) > -1 );
     this.setState( { searchedItems : members } );
 
   },
@@ -104,14 +107,6 @@ const User = React.createClass({
               }
             </div>
           </div>
-          <div className="card">
-            <div className="card-header"> Add User </div>
-            <TextField ref="userName" hintText="User Name" errorText={this.state.errorText} onChange={this.onInputChange} />
-            <br/>
-            <SelectField displayMember="name" valueMember="id" onChange={this.onSelectValueChange} menuItems={this.state.totalGroupItems} />
-            <br/>
-            <RaisedButton label="ADD" onTouchTap={ this.onUserAdded }  />
-          </div>
           <div className="card card__list">
             <div className="card-header"> Search User </div>
             <TextField ref="userName" hintText="Search User Text" onChange={this.onSearchTextChange} />
@@ -124,6 +119,14 @@ const User = React.createClass({
                 }
                 </div> : null
               }
+          </div>
+          <div className="card">
+            <div className="card-header"> Add User </div>
+            <TextField ref="userName" hintText="User Name" errorText={this.state.errorText} onChange={this.onInputChange} />
+            <br/>
+            <SelectField displayMember="name" valueMember="id" onChange={this.onSelectValueChange} menuItems={this.state.totalGroupItems} />
+            <br/>
+            <RaisedButton label="ADD" onTouchTap={ this.onUserAdded }  />
           </div>
         </div>
       </div>
