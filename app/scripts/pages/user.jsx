@@ -17,6 +17,7 @@ const User = React.createClass({
     return {
       totalUserItems : [],
       totalGroupItems : [],
+      searchedItems : [],
       newUserName :'',
       errorText : ''
     };
@@ -81,6 +82,14 @@ const User = React.createClass({
     this.setState({groupIndex : index, groupName : data.name }) ;
   },
 
+  onSearchTextChange(evt){
+    let searchText = evt.target.value;
+
+    let members = this.state.totalUserItems.filter( item => item.name.toLowerCase() == searchText.toLowerCase()) ;
+    this.setState( { searchedItems : members } );
+
+  },
+
   render() {
     return (
       <div>
@@ -102,6 +111,19 @@ const User = React.createClass({
             <SelectField displayMember="name" valueMember="id" onChange={this.onSelectValueChange} menuItems={this.state.totalGroupItems} />
             <br/>
             <RaisedButton label="ADD" onTouchTap={ this.onUserAdded }  />
+          </div>
+          <div className="card card__list">
+            <div className="card-header"> Search User </div>
+            <TextField ref="userName" hintText="Search User Text" onChange={this.onSearchTextChange} />
+              { this.state.searchedItems.length ?
+                <div >
+                {
+                  this.state.searchedItems.map(function(item) {
+                    return <UserItem key={item.id} id={item.id} name={item.name} />
+                  })
+                }
+                </div> : null
+              }
           </div>
         </div>
       </div>
