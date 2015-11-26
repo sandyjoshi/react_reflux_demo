@@ -43,16 +43,12 @@ const User = React.createClass({
       let groupIndex = state.totalGroupItems[0].id ;
       let groupName = state.totalGroupItems[0].name ;
       newState = Object.assign(newState, { 'groupIndex' : groupIndex , 'groupName' : groupName });
-
     }
 
     if( state.totalUserItems && state.totalUserItems.length ){
       let members = state.totalUserItems.filter( item => item.name.toLowerCase().indexOf( this.state.filterString.toLowerCase()) > -1 );
       newState = Object.assign(newState, { 'searchedItems' : members });
-
     }
-
-
 
     this.setState( newState );
   },

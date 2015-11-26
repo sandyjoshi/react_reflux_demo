@@ -6,15 +6,6 @@ import saveLocalStorage from '../helpers/localStorage';
 let GroupStore = Reflux.createStore({
   listenables: GroupActions,
 
-  // getInitialState() {
-  //   return this.list;
-  // },
-
-  // getDefaultData: function() {
-  //    return this.list;
-  //  },
-
-
   init() {
 
     let items = localStorage.getItem( "groups" ) ;
@@ -25,14 +16,12 @@ let GroupStore = Reflux.createStore({
   },
 
   onLoadItems() {
-    // ToDO : API call required.
     this.trigger({
       totalGroupItems : this.totalGroupItems
     });
   },
 
   onAddItem(data){
-    // ToDO : API call required which will return id of new user.
     if( this.totalGroupItems.length > 0 ){
       data.id = this.totalGroupItems[ this.totalGroupItems.length - 1 ].id + 1 ;
     }
@@ -59,7 +48,6 @@ let GroupStore = Reflux.createStore({
   },
 
   onDeleteUserFromAllGroup(userId){
-    // ToDo : make an API call.
     this.totalGroupItems.forEach(function (group) {
       let index = group.users.findIndex( item => item.id == userId);
       group.users.splice(index, 1);
@@ -71,7 +59,6 @@ let GroupStore = Reflux.createStore({
   },
 
   onDeleteUserFromGroup(userId,groupId){
-    // ToDo : make an API call.
     var group = this.totalGroupItems.find( item => item.id == groupId);
     var index = group.users.findIndex( item => item.id == userId);
     group.users.splice(index, 1);
@@ -79,11 +66,9 @@ let GroupStore = Reflux.createStore({
       totalGroupItems : this.totalGroupItems
     });
     saveLocalStorage( [{ 'key' : 'groups' , 'val' : JSON.stringify(this.totalGroupItems) }] );
-
   },
 
   onGetDetails(id){
-    // ToDo : make an API call if user item contains more data then stored in list.
     var data = this.totalGroupItems.find( item => item.id == id);
     this.trigger({
       groupUserItems : data.users ,
@@ -93,7 +78,6 @@ let GroupStore = Reflux.createStore({
   },
 
   onAddUserToGroup(data){
-    // ToDo : API call to save data.
     var group = this.totalGroupItems.find( item => item.id == data.groupId);
     group.users.push( { id : data.userId , name : data.userName } ) ;
     this.trigger({
