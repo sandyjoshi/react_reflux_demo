@@ -1,22 +1,27 @@
 import Reflux from 'reflux';
 import GroupActions from '../actions/groupActions';
+import saveLocalStorage from '../helpers/localStorage';
 
 
 let GroupStore = Reflux.createStore({
   listenables: GroupActions,
 
-  getInitialState() {
-    return this.list;
-  },
+  // getInitialState() {
+  //   return this.list;
+  // },
 
-  getDefaultData: function() {
-     return this.list;
-   },
+  // getDefaultData: function() {
+  //    return this.list;
+  //  },
 
 
   init() {
-    this.totalGroupItems = [ { id : 1 , name : 'group_1' , users : [ { id : 2 , name : 'sandy' } ] } ,
-     { id : 2 , name : 'group_2' , users : [ { id : 1 , name : 'sandeep' } ,{ id : 2 , name : 'sandy' } ] }];
+
+    let items = localStorage.getItem( "groups" ) ;
+    this.totalGroupItems = items ? JSON.parse(items) : [] ;
+
+    // this.totalGroupItems = [ { id : 1 , name : 'group_1' , users : [ { id : 2 , name : 'sandy' } ] } ,
+    //  { id : 2 , name : 'group_2' , users : [ { id : 1 , name : 'sandeep' } ,{ id : 2 , name : 'sandy' } ] }];
   },
 
   onLoadItems() {
@@ -41,6 +46,7 @@ let GroupStore = Reflux.createStore({
       totalGroupItems : this.totalGroupItems
     });
 
+    saveLocalStorage( [{ 'key' : 'groups' , 'val' : JSON.stringify(this.totalGroupItems) }] );
   },
 
   onDeleteItem(groupId){
@@ -49,7 +55,7 @@ let GroupStore = Reflux.createStore({
     this.trigger({
       totalGroupItems : this.totalGroupItems
     });
-
+    saveLocalStorage( [{ 'key' : 'groups' , 'val' : JSON.stringify(this.totalGroupItems) }] );
   },
 
   onDeleteUserFromAllGroup(userId){
@@ -61,6 +67,7 @@ let GroupStore = Reflux.createStore({
     this.trigger({
       totalGroupItems : this.totalGroupItems
     });
+    saveLocalStorage( [{ 'key' : 'groups' , 'val' : JSON.stringify(this.totalGroupItems) }] );
   },
 
   onDeleteUserFromGroup(userId,groupId){
@@ -71,6 +78,8 @@ let GroupStore = Reflux.createStore({
     this.trigger({
       totalGroupItems : this.totalGroupItems
     });
+    saveLocalStorage( [{ 'key' : 'groups' , 'val' : JSON.stringify(this.totalGroupItems) }] );
+
   },
 
   onGetDetails(id){
@@ -92,10 +101,8 @@ let GroupStore = Reflux.createStore({
       groupId : group.id ,
       groupName : group.name
     });
+    saveLocalStorage( [{ 'key' : 'groups' , 'val' : JSON.stringify(this.totalGroupItems) }] );
   }
-
-
-
 
 });
 

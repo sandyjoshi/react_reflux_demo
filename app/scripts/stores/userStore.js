@@ -1,19 +1,25 @@
 import Reflux from 'reflux';
 import UserActions from '../actions/userActions';
 import GroupActions from '../actions/groupActions';
+import saveLocalStorage from '../helpers/localStorage';
 
 
 let UserStore = Reflux.createStore({
   listenables: UserActions,
 
   init() {
-    this.totalUserItems = [{ id : 1 , name : 'sandeep' , group : [ { id : 2, name : 'group_2' } ] },
-     { id : 2 , name : 'sandy' , group : [ { id : 1 , name : 'group_1' } , { id : 2 , name : 'group_2' } ] }];
+
+    let items = localStorage.getItem( "users" ) ;
+    this.totalUserItems = items ? JSON.parse(items) : [] ;
+
+
+    // this.totalUserItems = [{ id : 1 , name : 'sandeep' , group : [ { id : 2, name : 'group_2' } ] },
+    //  { id : 2 , name : 'sandy' , group : [ { id : 1 , name : 'group_1' } , { id : 2 , name : 'group_2' } ] }];
   },
 
-  getInitialState() {
-    return this.list;
-  },
+  // getInitialState() {
+  //   return this.list;
+  // },
 
   onLoadItems() {
     // ToDO : API call required.
@@ -39,7 +45,7 @@ let UserStore = Reflux.createStore({
     this.trigger({
       totalUserItems : this.totalUserItems
     });
-
+    saveLocalStorage( [{ 'key' : 'users' , 'val' : JSON.stringify(this.totalUserItems) }] );
   },
 
   deleteItem(id){
@@ -49,6 +55,7 @@ let UserStore = Reflux.createStore({
     this.trigger({
       totalUserItems : this.totalUserItems
     });
+    saveLocalStorage( [{ 'key' : 'users' , 'val' : JSON.stringify(this.totalUserItems) }] );
   },
 
   onDeleteGroupFromUser(userId,groupId){
@@ -59,6 +66,8 @@ let UserStore = Reflux.createStore({
     this.trigger({
       totalUserItems : this.totalUserItems
     });
+    saveLocalStorage( [{ 'key' : 'users' , 'val' : JSON.stringify(this.totalUserItems) }] );
+
   },
 
 
@@ -81,10 +90,8 @@ let UserStore = Reflux.createStore({
       userId : user.id ,
       userName : user.name
     });
+    saveLocalStorage( [{ 'key' : 'users' , 'val' : JSON.stringify(this.totalUserItems) }] );
   }
-
-
-
 
 });
 

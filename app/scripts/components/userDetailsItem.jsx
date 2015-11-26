@@ -9,7 +9,7 @@ import GroupActions from '../actions/groupActions';
 /**
  * UserDetailsItem component to show list items of UserDetails component.
  */
-var UserDetailsItem = React.createClass({
+const UserDetailsItem = React.createClass({
 
   render() {
     return (

@@ -8,7 +8,7 @@ import GroupActions from '../actions/groupActions';
 /**
  * UserItem component to show list items of User component.
  */
-var UserItem = React.createClass({
+const UserItem = React.createClass({
 
   render() {
     return (

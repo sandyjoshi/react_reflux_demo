@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 /**
  * GroupItem component to show list items of Group component.
  */
-var GroupItem = React.createClass({
+const GroupItem = React.createClass({
 
   render() {
     return (
