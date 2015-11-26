@@ -36,6 +36,13 @@ gulp.task('scripts', function() {
     .pipe($.connect.reload());
 });
 
+// copy sw from app to dist
+gulp.task('sw', function() {
+  return gulp.src([app + 'scripts/service-worker.js',app + 'scripts/sw-registration.js'])
+    .pipe(gulp.dest(dist ))
+});
+
+
 // copy html from app to dist
 gulp.task('html', function() {
   return gulp.src(app + 'index.html')
@@ -86,7 +93,7 @@ gulp.task('clean', function(cb) {
 
 
 // by default build project and then watch files in order to trigger livereload
-gulp.task('default', ['images', 'html','scripts', 'less', 'serve', 'watch']);
+gulp.task('default', ['images', 'html','scripts', 'less', 'sw', 'serve', 'watch']);
 
 // waits until clean is finished then builds the project
 gulp.task('build', ['clean'], function(){
