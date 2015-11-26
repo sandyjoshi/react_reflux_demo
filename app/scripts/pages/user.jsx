@@ -66,7 +66,7 @@ const User = React.createClass({
    */
   onInputChange(evt){
     this.setState({ newUserName : evt.target.value });
-    if( !this.state.newUserName  ){
+    if( !evt.target.value ){
       this.setState({errorText : "Please add User name."});
     }
     else{

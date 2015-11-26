@@ -50,7 +50,7 @@ const Group = React.createClass({
   onInputChange(evt){
     this.setState({ newGroupName : evt.target.value });
 
-    if( !this.state.newGroupName  ){
+    if( !evt.target.value  ){
       this.setState({errorText : "Please add group name."});
     }
     else{

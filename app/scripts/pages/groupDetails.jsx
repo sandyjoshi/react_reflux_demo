@@ -59,7 +59,7 @@ const GroupDetails = React.createClass({
     GroupActions.addUserToGroup({ 'groupId' : this.state.groupId , 'userId' :  this.state.userIndex , 'userName' : user.name });
   },
 
-  handleSelectValueChange(evt,index){
+  onSelectValueChange(evt,index){
     this.setState({userIndex : index}) ;
   },
 
@@ -80,7 +80,7 @@ const GroupDetails = React.createClass({
           <div className="card">
             <div className="card-header"> Add user to group {this.state.groupName} </div>
             <br/>
-            <SelectField displayMember="name" valueMember="id" onChange={this.handleSelectValueChange} disabled={!this.state.remaingUsers.length} menuItems={this.state.remaingUsers} />
+            <SelectField displayMember="name" valueMember="id" onChange={this.onSelectValueChange} disabled={!this.state.remaingUsers.length} menuItems={this.state.remaingUsers} />
             <br/>
             <RaisedButton label="ADD" onTouchTap={ this.onUserAddedToGroup } disabled={!this.state.remaingUsers.length} />
           </div>
