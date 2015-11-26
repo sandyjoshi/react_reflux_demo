@@ -19,6 +19,7 @@ const User = React.createClass({
       totalGroupItems : [],
       searchedItems : [],
       newUserName :'',
+      filterString : '',
       errorText : ''
     };
   },
@@ -41,9 +42,17 @@ const User = React.createClass({
     if( state.totalGroupItems && state.totalGroupItems.length ){
       let groupIndex = state.totalGroupItems[0].id ;
       let groupName = state.totalGroupItems[0].name ;
+      newState = Object.assign(newState, { 'groupIndex' : groupIndex , 'groupName' : groupName });
 
-      newState = Object.assign(state, { 'groupIndex' : groupIndex , 'groupName' : groupName });
     }
+
+    if( state.totalUserItems && state.totalUserItems.length ){
+      let members = state.totalUserItems.filter( item => item.name.toLowerCase().indexOf( this.state.filterString.toLowerCase()) > -1 );
+      newState = Object.assign(newState, { 'searchedItems' : members });
+
+    }
+
+
 
     this.setState( newState );
   },
@@ -89,7 +98,7 @@ const User = React.createClass({
     let searchText = evt.target.value;
 
     let members = this.state.totalUserItems.filter( item => item.name.toLowerCase().indexOf( searchText.toLowerCase()) > -1 );
-    this.setState( { searchedItems : members } );
+    this.setState( { filterString : searchText , searchedItems : members } );
 
   },
 
@@ -98,18 +107,8 @@ const User = React.createClass({
       <div>
         <div className="card__container">
           <div className="card card__list">
-            <div className="card-header"> User List </div>
-              <div >
-              {
-                this.state.totalUserItems.map(function(item) {
-                  return <UserItem key={item.id} id={item.id} name={item.name} />
-                })
-              }
-            </div>
-          </div>
-          <div className="card card__list">
             <div className="card-header"> Search User </div>
-            <TextField ref="userName" hintText="Search User Text" onChange={this.onSearchTextChange} />
+            <TextField hintText="Search User Text" onChange={this.onSearchTextChange} />
               { this.state.searchedItems.length ?
                 <div >
                 {
