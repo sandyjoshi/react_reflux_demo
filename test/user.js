@@ -1,7 +1,8 @@
 var localStorage = require('./localStorage');
 
 var assert = require('assert');
-var expect = require('expect');
+var chai = require('chai');
+var expect = chai.expect;
 import UserActions from '../app/scripts/actions/userActions';
 import UserStore from '../app/scripts/stores/userStore';
 
@@ -16,8 +17,8 @@ describe('User Store', function() {
 
 
   it("is configured", function () {
-    // expect(UserStore.listenables).to.include(UserActions);
-    // expect(UserActions.addItem).to.be.a('function');
+    expect(UserStore.listenables).to.include(UserActions);
+    expect(UserActions.addItem).to.be.a('function');
   });
 
   it('should contain newly added item', function () {
