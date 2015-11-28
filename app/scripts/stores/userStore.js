@@ -40,7 +40,7 @@ let UserStore = Reflux.createStore({
     saveLocalStorage( [{ 'key' : 'users' , 'val' : JSON.stringify(this.totalUserItems) }] );
   },
 
-  deleteItem(id){
+  onDeleteItem(id){
     var index = this.totalUserItems.findIndex( item => item.id == id);
     this.totalUserItems.splice(index, 1);
     this.trigger({
