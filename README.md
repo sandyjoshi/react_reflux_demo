@@ -37,11 +37,11 @@ $ gulp build --type production
 
 ## Testing
 
-We use [jest](http://facebook.github.io/jest/) to test our application.<br />
-You can run the tests that are defined under [app/scripts/\_\_tests__](./app/scripts/__tests__) with
+We use [Mocha](https://mochajs.org/) to test our application.<br />
+You can run the tests that are defined under [test](./test) with
 
 ```
-$ npm test
+$ mocha --compilers js:babel-core/register
 
 ```
 
