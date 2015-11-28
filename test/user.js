@@ -18,7 +18,13 @@ describe('User Store', function() {
 
   it("is configured", function () {
     expect(UserStore.listenables).to.include(UserActions);
+    expect(UserActions.loadItems).to.be.a('function');
     expect(UserActions.addItem).to.be.a('function');
+    expect(UserActions.deleteItem).to.be.a('function');
+    expect(UserActions.getDetails).to.be.a('function');
+    expect(UserActions.deleteGroupFromUser).to.be.a('function');
+    expect(UserActions.addGroupToUser).to.be.a('function');
+
   });
 
   it('should contain newly added item', function () {

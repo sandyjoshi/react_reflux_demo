@@ -22,6 +22,6 @@ function storageMock() {
   };
 }
 
-
-
 global.localStorage = storageMock();
+
+export default storageMock;

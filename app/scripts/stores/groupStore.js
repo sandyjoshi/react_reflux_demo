@@ -28,7 +28,7 @@ let GroupStore = Reflux.createStore({
     else{
       data.id = 1 ;
     }
-    data.users = [];
+    data.users = data.users ? data.users : [];
     this.totalGroupItems.push(data);
 
     this.trigger({
