@@ -1,6 +1,6 @@
 # React Demo
 
-[React Startkit](https://github.com/wbkd/react-starterkit) is used for generating the repo.
+[React Starter kit](https://github.com/wbkd/react-starterkit) is used for generating the repo.
 This [Ui](http://material-ui.com/#/home) frame work is used.
 
 ## To Run
